@@ -135,3 +135,4 @@ bower.json
 .idea
 out
 gen
+/config/application.yml
