@@ -3,7 +3,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios
   def index
-    @scenarios = Scenario.all
+    @scenarios = Scenario.where(search_params).order(:order)
 
     render json: @scenarios
   end
@@ -43,6 +43,10 @@ class ScenariosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_scenario
       @scenario = Scenario.find(params[:id])
+    end
+
+    def search_params
+      params.permit(:active)
     end
 
     # Only allow a trusted parameter "white list" through.
