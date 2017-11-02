@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031073819) do
+ActiveRecord::Schema.define(version: 20171102102640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20171031073819) do
     t.index ["order"], name: "index_scenarios_on_order"
   end
 
+  create_table "scenes", force: :cascade do |t|
+    t.bigint "stage_id"
+    t.text "content"
+    t.integer "sex", default: 0
+    t.boolean "example", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stage_id"], name: "index_scenes_on_stage_id"
+  end
+
   create_table "stages", force: :cascade do |t|
     t.bigint "scenario_id"
     t.integer "order"
@@ -35,5 +45,6 @@ ActiveRecord::Schema.define(version: 20171031073819) do
     t.index ["scenario_id"], name: "index_stages_on_scenario_id"
   end
 
+  add_foreign_key "scenes", "stages"
   add_foreign_key "stages", "scenarios"
 end
