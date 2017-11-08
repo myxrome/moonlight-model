@@ -3,7 +3,7 @@ class ScenariosController < ApplicationController
 
   # GET /scenarios
   def index
-    @scenarios = Scenario.where(search_params).order(:order)
+    @scenarios = Scenario.where(search_params)
 
     render json: @scenarios
   end
@@ -46,7 +46,7 @@ class ScenariosController < ApplicationController
     end
 
     def search_params
-      params.permit(:active)
+      params.permit(:active, :key)
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -16,19 +16,20 @@ ActiveRecord::Schema.define(version: 20171102102640) do
   enable_extension "plpgsql"
 
   create_table "scenarios", force: :cascade do |t|
+    t.string "key"
+    t.boolean "active", default: false
+    t.integer "order"
     t.string "title"
     t.text "description"
-    t.integer "order"
-    t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order"], name: "index_scenarios_on_order"
+    t.index ["active"], name: "index_scenarios_on_active"
+    t.index ["key"], name: "index_scenarios_on_key", unique: true
   end
 
   create_table "scenes", force: :cascade do |t|
     t.bigint "stage_id"
     t.text "content"
-    t.integer "sex", default: 0
     t.boolean "example", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

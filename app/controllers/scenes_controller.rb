@@ -51,6 +51,6 @@ class ScenesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def scene_params
-      params.require(:scene).permit(:stage_id, :content, :sex, :example)
+      params.require(:scene).permit(:stage_id, :content, :example)
     end
 end
